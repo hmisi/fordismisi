@@ -18,6 +18,8 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <link rel="shortcut icon" href="https://64.media.tumblr.com/bc95cfa5ab29b1bbf6474456aae24e28/7040187b7d4ccdc2-45/s1280x1920/1e9d6d15abb248c74a07153064990d34735bf8a5.png" type="image/x-icon">
 
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
+
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
