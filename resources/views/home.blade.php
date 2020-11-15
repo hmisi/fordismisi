@@ -92,7 +92,7 @@
         </div>
         <div class="col-lg-8">
             <div class="card-deck row m-0 justify-content-center mb-3">
-                <div class="card-body">
+                <div class="card-body text-center">
                     <h3>Daftar Pertanyaan.</h3>
                 </div>
             </div>
@@ -158,7 +158,7 @@
                     @foreach ($questComents as $questComent)
                     @if ($questComent->question_id == $question->id)
                     <p class="text-muted text-left blockquote-footer">{{$questComent->content}} - at
-                        {{$question->created_at->format('D M Y')}} By @foreach ($users as $user)
+                        {{$question->created_at->format('D M Y')}} Oleh @foreach ($users as $user)
                         @if ($user->id == $questComent->user_id)
                         {{$user->name}}
                         @endif
@@ -224,7 +224,7 @@
                         <h5 class="text-right">
                             @endif
                             {{$answer->content}} - at
-                            {{$question->created_at->format('D M Y')}} By @foreach ($users as $user)
+                            {{$question->created_at->format('D M Y')}} Oleh @foreach ($users as $user)
                             @if ($user->id == $answer->user_id)
                             {{$user->name}}
                             @if ($question->user_id == Auth::user()->id)<br>
@@ -278,7 +278,7 @@
                         @foreach ($answerComents as $answerComent)
                         @if ($answerComent->answer_id == $answer->id)
                         <p class="text-muted text-right blockquote-footer">{{$answerComent->content}} - at
-                            {{$answerComent->created_at->format('D M Y')}} By @foreach ($users as $user)
+                            {{$answerComent->created_at->format('D M Y')}} Oleh @foreach ($users as $user)
                             @if ($user->id == $answerComent->user_id)
                             {{$user->name}}
                             @endif
@@ -328,6 +328,7 @@
                         @endif
                         @endforeach
 
+                        @if ($answer->best_answer != 1)
 
                         {{-- membuat jawaban --}}
 
@@ -361,6 +362,8 @@
                                 </form>
                             </div>
                         </div>
+                        @endif
+
                 </div>
             </div>
             @endforeach
