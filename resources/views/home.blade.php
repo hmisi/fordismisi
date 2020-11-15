@@ -14,7 +14,7 @@
                               <h1 class="p-3">Bertanya Menambah Wawasan</h1>
                             </div>
                           <div class="carousel-item ">
-                            <h1 class="p-3">Vragen voegt inzichten toe</h1>
+                            <h1 class="p-3">Запрашивать добавляет статистику</h1>
                           </div>
                           <div class="carousel-item">
                             <h1 class="p-3">Chiedere aggiunge approfondimenti</h1>
@@ -103,7 +103,7 @@
             </div>
             {{-- daftar pertanyaan --}}
             @foreach ($questions as $question)
-            <div class="card-deck row m-0 justify-content-center my-3">
+            <div class="card-deck row m-0 justify-content-center mb-3">
                 <div class="card-body">
                     <div class="row">
                         {{-- <div class="col-sm-1"> --}}
@@ -124,7 +124,7 @@
                                 <input type="hidden" name="vote" value="0">
                             </form>
                         </div> --}}
-                        <div class="col-sm-112">
+                        <div class="col-sm-12">
                             <h4>{{$question->title}} <br>
                                 @if ($question->user_id == Auth::user()->id)
 
@@ -150,8 +150,13 @@
                             </p>
                             @endif
                             @endforeach
+                            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                                Detail Jawaban
+                              </button>
                         </div>
                     </div>
+
+                    <div class="collapse" id="collapseExample">
 
                     <h6 class="text-left">- Komentar Pertanyaannya -<a data-toggle="collapse"
                             data-target="#collapse_komentar_pertanyaan{{$question->id}}" aria-expanded="false"
@@ -365,10 +370,11 @@
                                 </form>
                             </div>
                         </div>
+                    </div>
                 </div>
             </div>
-            @endforeach
             <hr>
+            @endforeach
         </div>
     </div>
 </div>
