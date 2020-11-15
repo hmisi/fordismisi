@@ -1,7 +1,8 @@
 @extends('layouts.app')
+@section('title', 'Login ke AyoAsk!')
+@section('desc', 'Masuk untuk memulai perjalanan belajar kamu!')
 
 @section('content')
-<div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="">
@@ -51,5 +52,4 @@
             </div>
         </div>
     </div>
-</div>
 @endsection

@@ -6,8 +6,9 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="description" content="@yield('desc')">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>@yield('title')</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -15,13 +16,14 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link rel="shortcut icon" href="https://64.media.tumblr.com/bc95cfa5ab29b1bbf6474456aae24e28/7040187b7d4ccdc2-45/s1280x1920/1e9d6d15abb248c74a07153064990d34735bf8a5.png" type="image/x-icon">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
-<body>
+<body class="container">
     <div id="app">
-        <div class="container">
+        <div>
             <nav class="navbar mt-5">
                 <a class="navbar-brand text-dark" href="{{url('/')}}"><b>AyoAsk!</b></a>
                 <div class="form-inline">
@@ -33,8 +35,8 @@
                                     <a class="badge badge-warning p-2" href="{{ route('register') }}">{{ __('Register') }}</a>
                             @endif
                         @else
-                            <div class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            <div class="dropdown">
+                                <b>Hi!</b> <a id="navbarDropdown" class="text-dark dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
                                 </a>
 
@@ -55,9 +57,9 @@
             </div>
         </nav>
 
-        <main class="content">
-            @yield('content')
-        </main>
+            <main class="content">
+                @yield('content')
+            </main>
         <div class="text-center my-5">
             <p>&copy; Copyright AyoAsk! {{date('Y')}}<br>Dibuat dengan [ 🖤 ] dari Developer untuk Developers</p>
         </div>
