@@ -1,10 +1,10 @@
 @extends('layouts.app')
-@section('title', 'Larahub | Edit Jawaban')
+@section('title', 'AyoAsk! | Edit Jawaban')
 @section('content')
 <div class="flex-center position-ref full-height">
 
     <div class="content">
-        <div class="card-deck row m-0 justify-content-center shadow">
+        <div class="row m-0 justify-content-center">
             <div class="card-body">
                 <h3>Edit Jawaban.</h3>
 

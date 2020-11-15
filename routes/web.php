@@ -17,10 +17,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
-
 Route::get('/home', 'HomeController@index')->name('home');
 
+Auth::routes();
 Route::post('/question', 'QuestionController@store');
 Route::delete('/pertanyaan/{question}', 'QuestionController@destroy');
 Route::get('/pertanyaan/{question}/edit', 'QuestionController@edit');

@@ -4,11 +4,27 @@
 
 @section('content')
 <div class="container">
+
     <div class="row justify-content-center mb-3">
-        <div class="col-lg-12">
+        <div class="col-lg-9">
             <div class="my-3 row m-0 justify-content-center">
                 <div class="card-body text-center">
-                    <h1 class="p-3">Leer Vragen</h1>
+                    <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active" >
+                              <h1 class="p-3">Bertanya Menambah Wawasan</h1>
+                            </div>
+                          <div class="carousel-item ">
+                            <h1 class="p-3">Vragen voegt inzichten toe</h1>
+                          </div>
+                          <div class="carousel-item">
+                            <h1 class="p-3">Chiedere aggiunge approfondimenti</h1>
+                          </div>
+                          <div class="carousel-item">
+                            <h1 class="p-3">Shitsumon wa dōsatsu o tsuika shimasu</h1>
+                          </div>
+                        </div>
+                      </div>
                 </div>
             </div>
         </div>
@@ -25,6 +41,55 @@
             </div>
             @endif
         </div>
+        <div class="col-lg-4">
+            <div class="card-deck row m-0 justify-content-center">
+                <div class="card-body">
+
+                    {{-- membat pertanyaan --}}
+                    <h3>Buat Pertanyaan.</h3>
+
+                    {{-- form --}}
+                    <form method="POST" action="/question">
+                        @csrf
+                        <div class="form-group">
+                            <label for="judul">Judul Pertanyaan</label>
+                            <input type="text" class=" @error('title') is-invalid @enderror form-control" id="title"
+                                name="title" placeholder="Masukan title Pertanyaan" value="{{old('title')}}" required>
+                            @error('title')
+                            <div class="invalid-feedback">
+                                {{$message}}
+                            </div>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="content">Isi Pertanyaan</label>
+                            <textarea type="text" class="form-control  @error('content') is-invalid @enderror "
+                                id="summernote" name="content" placeholder="Masukan Pertanyaan kamu!" required
+                                rows="3">{{old('content')}}</textarea>
+                            @error('content')
+                            <div class="invalid-feedback">
+                                {{$message}}
+                            </div>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="content">Tag Pertanyaan</label>
+                            <textarea type="text" class="form-control @error('content') is-invalid @enderror" id="tag"
+                                name="tags" placeholder="Masukan Tag Pertanyaan kamu!"
+                                required>{{ old('tags') }}</textarea>
+                            <small id="tags" class="form-text text-muted">*Pisahkan dengan spasi</small>
+                            @error('tags')
+                            <div class="invalid-feedback">
+                                {{$message}}
+                            </div>
+                            @enderror
+                        </div>
+                        <input type="hidden" name="user_id" id="" value="{{Auth::user()->id}}">
+                        <button type="submit" class="btn btn-primary">Buat Pertanyaan!</button>
+                    </form>
+                </div>
+            </div>
+        </div>
         <div class="col-lg-8">
             <div class="card-deck row m-0 justify-content-center mb-3">
                 <div class="card-body">
@@ -36,14 +101,14 @@
             <div class="card-deck row m-0 justify-content-center my-3">
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-sm-1">
+                        {{-- <div class="col-sm-1"> --}}
                             {{-- untuk vote --}}
 
-                            <div class="quantity">
+                            {{-- <div class="quantity">
                                 <input type="number" data-vote="question" data-id="{{$question->id}}" disabled min="1"
                                     max="100" step="1" value="{{ $question->vote_point() }}">
-                            </div>
-                            <form id="vote-question-up-{{$question->id}}"
+                            </div> --}}
+                            {{-- <form id="vote-question-up-{{$question->id}}"
                                 action="{{ route('question.vote', $question) }}" method="post">
                                 @csrf
                                 <input type="hidden" name="vote" value="1">
@@ -53,8 +118,8 @@
                                 @csrf
                                 <input type="hidden" name="vote" value="0">
                             </form>
-                        </div>
-                        <div class="col-sm-11">
+                        </div> --}}
+                        <div class="col-sm-112">
                             <h4>{{$question->title}} <br>
                                 @if ($question->user_id == Auth::user()->id)
 
@@ -76,7 +141,7 @@
 
                             @foreach ($users as $user)
                             @if ($user->id == $question->user_id)
-                            <p class="text-muted">By {{ $user->name }}, {{$question->created_at->format('D M Y, H:i')}}
+                            <p class="text-muted">Oleh {{ $user->name }}, {{$question->created_at->format('d M Y')}}
                             </p>
                             @endif
                             @endforeach
@@ -139,10 +204,10 @@
                     <h3 class="text-right">- Jawaban -</h3>
                     @foreach ($answers as $answer)
                     @if ($answer->question_id == $question->id)
-                    <div class="quantity">
+                    {{-- <div class="quantity">
                         <input type="number" data-vote="answer" data-id="{{$answer->id}}" disabled min="1" max="100"
                             step="1" value="{{ $answer->vote_point() }}">
-                    </div>
+                    </div> --}}
                     <form id="vote-answer-up-{{$answer->id}}" action="{{ route('answer.vote', $answer) }}"
                         method="post">
                         @csrf
@@ -301,61 +366,16 @@
             @endforeach
             <hr>
         </div>
-        <div class="col-lg-4">
-            <div class="card-deck row m-0 justify-content-center">
-                <div class="card-body">
-
-                    {{-- membat pertanyaan --}}
-                    <h3>Buat Pertanyaan.</h3>
-
-                    {{-- form --}}
-                    <form method="POST" action="/question">
-                        @csrf
-                        <div class="form-group">
-                            <label for="judul">Judul Pertanyaan</label>
-                            <input type="text" class=" @error('title') is-invalid @enderror form-control" id="title"
-                                name="title" placeholder="Masukan title Pertanyaan" value="{{old('title')}}" required>
-                            @error('title')
-                            <div class="invalid-feedback">
-                                {{$message}}
-                            </div>
-                            @enderror
-                        </div>
-                        <div class="form-group">
-                            <label for="content">Isi Pertanyaan</label>
-                            <textarea type="text" class="form-control  @error('content') is-invalid @enderror "
-                                id="content" name="content" placeholder="Masukan Pertanyaan kamu!" required
-                                rows="3">{{old('content')}}</textarea>
-                            @error('content')
-                            <div class="invalid-feedback">
-                                {{$message}}
-                            </div>
-                            @enderror
-                        </div>
-                        <div class="form-group">
-                            <label for="content">Tag Pertanyaan</label>
-                            <textarea type="text" class="form-control @error('content') is-invalid @enderror" id="tag"
-                                name="tags" placeholder="Masukan Tag Pertanyaan kamu!"
-                                required>{{ old('tags') }}</textarea>
-                            <small id="tags" class="form-text text-muted">*Pisahkan dengan spasi</small>
-                            @error('tags')
-                            <div class="invalid-feedback">
-                                {{$message}}
-                            </div>
-                            @enderror
-                        </div>
-                        <input type="hidden" name="user_id" id="" value="{{Auth::user()->id}}">
-                        <button type="submit" class="btn btn-primary">Buat Pertanyaan!</button>
-                    </form>
-                </div>
-            </div>
-        </div>
     </div>
 </div>
 @endsection
 
 @push('scripts')
 <script>
+
+$(document).ready(function() {
+  $('#summernote').summernote();
+});
     $(document).ready(function () {
         $('<div class="quantity-nav"><div class="quantity-button quantity-up">+</div><div class="quantity-button quantity-down">-</div></div>')
             .insertAfter('.quantity input');

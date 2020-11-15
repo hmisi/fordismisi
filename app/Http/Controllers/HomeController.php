@@ -9,7 +9,7 @@ use App\QuestionComment;
 use App\Answer;
 use App\AnswerComment;
 use App\BestAnswer;
-use App\user;
+use App\User;
 
 class HomeController extends Controller
 {
@@ -39,7 +39,6 @@ class HomeController extends Controller
 
         // view
         $data = [
-            'title' => "Welcome To Larahub",
             'questions' => $questions,
             'questComents' => $questComents,
             'answers' => $answers,
