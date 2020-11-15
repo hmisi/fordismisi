@@ -65,7 +65,7 @@
                 @yield('content')
             </main>
         <div class="text-center my-5">
-            <p>&copy; Copyright AyoAsk! {{date('Y')}}<br>Dibuat dengan [ 🖤 ] dari Developer untuk Developers</p>
+            <p>&copy; Copyright AyoAsk! {{date('Y')}}<br>Dibuat dengan [ 🖤 ] dari <a href="https://randynetworks.club" target="_blank">Randynetworks</a> untuk Developers</p>
         </div>
     </div>
 
