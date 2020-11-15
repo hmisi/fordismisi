@@ -31,25 +31,14 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-12">
-            @if (session('status'))
-            <div class="alert alert-success">
-                {{ session('status') }}
-            </div>
-            @endif
 
-            @if(session('danger'))
-            <div class="alert alert-danger">
-                {{ session('danger') }}
-            </div>
-            @endif
-        </div>
         <div class="col-lg-4">
             <div class="card-deck row m-0 justify-content-center">
                 <div class="card-body">
 
                     {{-- membat pertanyaan --}}
                     <h3>Buat Pertanyaan.</h3>
+
 
                     {{-- form --}}
                     <form method="POST" action="/question">
@@ -97,6 +86,19 @@
             <div class="card-deck row m-0 justify-content-center mb-3">
                 <div class="card-body text-center">
                     <h3>Daftar Pertanyaan.</h3>
+                    <div class="col-lg-12">
+                        @if (session('status'))
+                        <div class="alert alert-success">
+                            {{ session('status') }}
+                        </div>
+                        @endif
+
+                        @if(session('danger'))
+                        <div class="alert alert-danger">
+                            {{ session('danger') }}
+                        </div>
+                        @endif
+                    </div>
                 </div>
             </div>
             {{-- daftar pertanyaan --}}
@@ -331,8 +333,6 @@
                         @endif
                         @endforeach
 
-                        @if ($answer->best_answer != 1)
-
                         {{-- membuat jawaban --}}
 
                         <div class="text-right mt-3">
@@ -365,8 +365,6 @@
                                 </form>
                             </div>
                         </div>
-                        @endif
-
                 </div>
             </div>
             @endforeach
