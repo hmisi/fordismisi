@@ -40,7 +40,9 @@ class AnswerController extends Controller
         // insert data
         Answer::create($request->all());
 
-        return redirect('/home')->with('status', 'Jawaban dikirim!!');
+
+
+        return redirect('/pertanyaan/'. $request->question_id)->with('status', 'Jawaban dikirim!!');
     }
 
     /**
@@ -82,7 +84,7 @@ class AnswerController extends Controller
             'content' => $request->content
         ]);
 
-        return redirect('/home')->with('status', 'Jawaban Diubah!!');
+        return redirect('/pertanyaan/'. $answer->question_id)->with('status', 'Jawaban Diubah!!');
     }
 
     /**
@@ -93,9 +95,10 @@ class AnswerController extends Controller
      */
     public function destroy(Answer $answer)
     {
+        $answerID = $answer->id;
         $answer->delete();
 
-        return redirect('/home')->with('status', 'jawaban Dihapus!!');
+        return redirect('/pertanyaan/'. $answerID)->with('status', 'jawaban Dihapus!!');
     }
 
     public function approved(Request $request, Answer $answer)
@@ -104,6 +107,6 @@ class AnswerController extends Controller
             'best_answer' => $request->best_answer
         ]);
 
-        return redirect('/home')->with('status', 'Jawaban Terbaik Diatur!!');
+        return redirect('/pertanyaan/'. $answer->question_id)->with('status', 'Jawaban Terbaik Diatur!!');
     }
 }

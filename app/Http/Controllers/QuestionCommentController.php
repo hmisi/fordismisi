@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Question;
 use App\QuestionComment;
 use Illuminate\Http\Request;
 
@@ -39,7 +40,10 @@ class QuestionCommentController extends Controller
          $request->validate(['content' => 'required']);
          // insert data
          QuestionComment::create($request->all());
-         return redirect('/home')->with('status', 'Komentar dikirim!!');
+
+
+        $questionID = Question::where('id', $request->question_id)->get();
+        return redirect('/pertanyaan/'.$questionID[0]->id)->with('status', 'Komentar ditambah!!');
     }
 
     /**
@@ -80,8 +84,9 @@ class QuestionCommentController extends Controller
         QuestionComment::where('id', $questionComment->id)->update([
             'content' => $request->content
         ]);
-        return redirect('/home')->with('status', 'Komentar Diubah!!');
-        
+        $questionID = Question::where('id', $questionComment->question_id)->get();
+        return redirect('/pertanyaan/'.$questionID[0]->id)->with('status', 'Komentar diubah!!');
+
     }
 
     /**
@@ -93,6 +98,8 @@ class QuestionCommentController extends Controller
     public function destroy(QuestionComment $questionComment)
     {
         QuestionComment::destroy($questionComment->id);
-        return redirect('/home')->with('status', 'Komentar Pertanyaan Dihapus!!');
+        $questionID = Question::where('id', $questionComment->question_id)->get();
+        return redirect('/pertanyaan/'.$questionID[0]->id)->with('status', 'Komentar dihapus!!');
+
     }
 }

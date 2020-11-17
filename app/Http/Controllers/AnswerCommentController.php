@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Answer;
 use App\AnswerComment;
+use App\Question;
 use Illuminate\Http\Request;
 
 class AnswerCommentController extends Controller
@@ -37,9 +39,12 @@ class AnswerCommentController extends Controller
     {
          // validasi
          $request->validate(['content' => 'required']);
+
+         $answerID = Answer::where('id', $request->answer_id)->get();
+
          // insert data
          AnswerComment::create($request->all());
-         return redirect('/home')->with('status', 'Komentar dikirim!!');
+         return redirect('/pertanyaan/'. $answerID[0]->question_id)->with('status', 'Komentar dikirim!!');
     }
 
     /**
@@ -80,7 +85,10 @@ class AnswerCommentController extends Controller
         AnswerComment::where('id', $answerComment->id)->update([
             'content' => $request->content
         ]);
-        return redirect('/home')->with('status', 'Komentar Diubah!!');
+
+        $answerID = Answer::where('id', $answerComment->answer_id)->get();
+
+        return redirect('/pertanyaan/' . $answerID[0]->question_id)->with('status', 'Komentar Diubah!!');
     }
 
     /**
@@ -91,7 +99,9 @@ class AnswerCommentController extends Controller
      */
     public function destroy(AnswerComment $answerComment)
     {
+        $answerID = Answer::where('id', $answerComment->answer_id)->get();
         AnswerComment::destroy($answerComment->id);
-        return redirect('/home')->with('status', 'Komentar jawaban Dihapus!!');
+
+        return redirect('/pertanyaan/' . $answerID[0]->question_id)->with('status', 'Komentar jawaban Dihapus!!');
     }
 }

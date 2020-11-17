@@ -2,20 +2,60 @@
 
 namespace App\Http\Controllers;
 
+use App\Answer;
+use App\AnswerComment;
 use App\Question;
 use App\QuestionComment;
 use App\Tag;
+use App\User;
 use Illuminate\Http\Request;
 
 class QuestionController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function single(Question $question)
     {
+
+
+        // take data
+        $questions = Question::where('id', $question->id)->get();
+        $userID = $questions[0]->user_id;
+        $questComents = QuestionComment::where('question_id', $question->id)->get();
+        $answers = Answer::where('question_id', $question->id)->get();
+        $users = User::where('id', $userID)->get();
+        if ($answers != null) {
+            $idAnswer = $answers[0]->id;
+            $answerComents = AnswerComment::where('answer_id', $idAnswer)->get();
+
+            // view
+            $data = [
+                'questions' => $questions,
+                'questComents' => $questComents,
+                'answers' => $answers,
+                'answerComents' => $answerComents,
+                'users' => $users
+            ];
+        }
+
+        // view
+        $data = [
+            'questions' => $questions,
+            'questComents' => $questComents,
+            'users' => $users
+        ];
+
+
+        return view('single', $data);
     }
 
     /**
@@ -102,7 +142,7 @@ class QuestionController extends Controller
         }
         $question->tags()->sync($tagIds);
 
-        return redirect('/home')->with('status', 'Pertanyaan Diubah!!');
+        return redirect('/pertanyaan/' . $question->id)->with('status', 'Pertanyaan Diubah!!');
     }
 
     /**
