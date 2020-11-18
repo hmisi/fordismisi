@@ -103,10 +103,10 @@
             </div>
             {{-- daftar pertanyaan --}}
             @foreach ($questions as $question)
-            <div class="row m-0 mb-3">
-                <div class="col-md-4">
+                <div class="row m-0 mb-3">
+                <div class="col-md-12">
                     <div class="border border-dark rounded p-3">
-                        <h4><a class="text-dark" href="/pertanyaan/{{$question->id}}">{{$question->title}}</a>
+                        <h4><u><a class="text-dark" href="/pertanyaan/{{$question->id}}">{{$question->title}}</a></u>
                         </h4>
                         <div class="my-2">
                             @foreach ($question->tags as $tag)
@@ -124,7 +124,7 @@
                     </div>
                 </div>
             </div>
-            @endforeach
+                @endforeach
         </div>
     </div>
 </div>

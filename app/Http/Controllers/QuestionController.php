@@ -25,33 +25,22 @@ class QuestionController extends Controller
      */
     public function single(Question $question)
     {
-
-
         // take data
         $questions = Question::where('id', $question->id)->get();
         $userID = $questions[0]->user_id;
-        $questComents = QuestionComment::where('question_id', $question->id)->get();
-        $answers = Answer::where('question_id', $question->id)->get();
+        $questComents = QuestionComment::where('question_id', $question->id)->orderBy('id', 'DESC')->get();
+        $answers = Answer::where('question_id', $question->id)->orderBy('id', 'DESC')->get();
         $users = User::where('id', $userID)->get();
-        if ($answers != null) {
-            $idAnswer = $answers[0]->id;
-            $answerComents = AnswerComment::where('answer_id', $idAnswer)->get();
+        $answerComents = AnswerComment::where('answer_id', $answers[0]->id)->orderBy('id', 'DESC')->get();
 
-            // view
-            $data = [
-                'questions' => $questions,
-                'questComents' => $questComents,
-                'answers' => $answers,
-                'answerComents' => $answerComents,
-                'users' => $users
-            ];
-        }
 
         // view
         $data = [
             'questions' => $questions,
             'questComents' => $questComents,
-            'users' => $users
+            'users' => $users,
+            'answers' => $answers,
+            'answerComents' => $answerComents
         ];
 
 

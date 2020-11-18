@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Answer;
+use App\Question;
 use Illuminate\Http\Request;
 
 class AnswerController extends Controller
@@ -95,10 +96,10 @@ class AnswerController extends Controller
      */
     public function destroy(Answer $answer)
     {
-        $answerID = $answer->id;
+        $questionID = Question::where('id', $answer->question_id)->get();
         $answer->delete();
 
-        return redirect('/pertanyaan/'. $answerID)->with('status', 'jawaban Dihapus!!');
+        return redirect('/pertanyaan/'. $questionID[0]->id)->with('status', 'jawaban Dihapus!!');
     }
 
     public function approved(Request $request, Answer $answer)
