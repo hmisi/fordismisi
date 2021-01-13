@@ -1,12 +1,14 @@
 @extends('layouts.app')
-@section('title', 'AyoAsk!')
-@section('desc', 'Forum Diskusi tentang Pemrograman Bahasa Indonesia. Ask, Tell, and Share')
+@section('title', 'FORDISMISI')
+@section('desc', 'Forum Diskusi tentang Pemrograman Bahasa Indonesia Oleh HMISI. Ask, Tell, and Share')
 @section('content')
 <div class="mt-5">
     <div class="row">
         <div class="col-xl-12">
             <header class="text-center mb-3">
-                <h1>Ask, Tell and Share!</h1>
+                <img src="https://hmisippg.org//assets/img/HMISI.png" alt="" width="150px" class="mb-3">
+                <h1>FORDISMISI</h1>
+                <p>Forum Diskusi Mahasiswa Informatika <br />dan Sistem Informasi.</p>
             </header>
         </div>
     </div>
@@ -43,7 +45,10 @@
             <p>================================</p>
         </div>
         <div class="col-md-5 text-center mt-3">
-            <p>AyoAsk! adalah adalah komunitas terbuka untuk siapa pun yang membuat kode. <br>Saling membantu satusama lain untuk tujuan bersama! </p>
+            <p><b>Forum Diskusi Mahasiswa Informatika dan Sistem Informasi</b> adalah wadah 
+              untuk menampung diskusi mahasiswa Informatika dan Sistem Informasi.
+              Melihat banyak mahasiswa yang kesulitan untuk bertanya tentang Informatika di Kampus.
+              Dengan adanya FORDISMISI, Diharapkan mahasiswa bisa menjadi lebih aktif bertanya dan menjawab.</p>
             <a class="btn btn-primary my-3" href="{{url('/home')}}">Mulai Memasuki Forum sekarang</a>
         </div>
     </div>

@@ -28,67 +28,60 @@
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
                         Baca Aturan Forum dulu!
                     </button>
-                    @if (Auth::user() == null)
-                      <a href="{{route('login')}}" class="btn btn-info">Mari bertanya disini!</a>
-                    @endif
                 </div>
             </div>
         </div>
 
-        @if (Auth::user() != null)
-          <div class="col-lg-4">
-              <div class="card-deck row m-0 justify-content-center">
-                  <div class="card-body">
+        <div class="col-lg-4">
+            <div class="card-deck row m-0 justify-content-center">
+                <div class="card-body">
 
-                      {{-- membat pertanyaan --}}
-                      <h3>Buat Pertanyaan.</h3>
-
-
-                      {{-- form --}}
-                      <form method="POST" action="/question">
-                          @csrf
-                          <div class="form-group">
-                              <label for="judul">Judul Pertanyaan</label>
-                              <input type="text" class=" @error('title') is-invalid @enderror form-control" id="title"
-                                  name="title" placeholder="Masukan title Pertanyaan" value="{{old('title')}}" required>
-                              @error('title')
-                              <div class="invalid-feedback">
-                                  {{$message}}
-                              </div>
-                              @enderror
-                          </div>
-                          <div class="form-group">
-                              <label for="content">Isi Pertanyaan</label>
-                              <textarea type="text" class="form-control  @error('content') is-invalid @enderror "
-                                  id="summernote" name="content" placeholder="Masukan Pertanyaan kamu!" required
-                                  rows="3">{{old('content')}}</textarea>
-                              @error('content')
-                              <div class="invalid-feedback">
-                                  {{$message}}
-                              </div>
-                              @enderror
-                          </div>
-                          <div class="form-group">
-                              <label for="content">Tag Pertanyaan</label>
-                              <textarea type="text" class="form-control @error('content') is-invalid @enderror" id="tag"
-                                  name="tags" placeholder="Masukan Tag Pertanyaan kamu!"
-                                  required>{{ old('tags') }}</textarea>
-                              <small id="tags" class="form-text text-muted">*Pisahkan dengan spasi</small>
-                              @error('tags')
-                              <div class="invalid-feedback">
-                                  {{$message}}
-                              </div>
-                              @enderror
-                          </div>
-                          <input type="hidden" name="user_id" id="" value="{{Auth::user()->id}}">
-                          <button type="submit" class="btn btn-primary">Buat Pertanyaan!</button>
-                      </form>
-                  </div>
-              </div>
-          </div>
-        @endif
+                    {{-- membat pertanyaan --}}
+                    <h3>Buat Pertanyaan.</h3>
 
 
+                    {{-- form --}}
+                    <form method="POST" action="/question">
+                        @csrf
+                        <div class="form-group">
+                            <label for="judul">Judul Pertanyaan</label>
+                            <input type="text" class=" @error('title') is-invalid @enderror form-control" id="title"
+                                name="title" placeholder="Masukan title Pertanyaan" value="{{old('title')}}" required>
+                            @error('title')
+                            <div class="invalid-feedback">
+                                {{$message}}
+                            </div>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="content">Isi Pertanyaan</label>
+                            <textarea type="text" class="form-control  @error('content') is-invalid @enderror "
+                                id="summernote" name="content" placeholder="Masukan Pertanyaan kamu!" required
+                                rows="3">{{old('content')}}</textarea>
+                            @error('content')
+                            <div class="invalid-feedback">
+                                {{$message}}
+                            </div>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="content">Tag Pertanyaan</label>
+                            <textarea type="text" class="form-control @error('content') is-invalid @enderror" id="tag"
+                                name="tags" placeholder="Masukan Tag Pertanyaan kamu!"
+                                required>{{ old('tags') }}</textarea>
+                            <small id="tags" class="form-text text-muted">*Pisahkan dengan spasi</small>
+                            @error('tags')
+                            <div class="invalid-feedback">
+                                {{$message}}
+                            </div>
+                            @enderror
+                        </div>
+                        <input type="hidden" name="user_id" id="" value="{{Auth::user()->id}}">
+                        <button type="submit" class="btn btn-primary">Buat Pertanyaan!</button>
+                    </form>
+                </div>
+            </div>
+        </div>
         <div class="col-lg-8">
             <div class="card-deck row m-0 justify-content-center mb-3">
                 <div class="card-body text-center">
