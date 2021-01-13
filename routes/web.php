@@ -20,7 +20,7 @@ Route::get('/', function () {
 Route::get('/home', 'HomeController@index')->name('home');
 
 Auth::routes();
-Route::get('/pertanyaan/{question}', 'QuestionController@single');
+Route::get('/pertanyaan/{slug}', 'QuestionController@single');
 Route::post('/question', 'QuestionController@store');
 Route::delete('/pertanyaan/{question}', 'QuestionController@destroy');
 Route::get('/pertanyaan/{question}/edit', 'QuestionController@edit');

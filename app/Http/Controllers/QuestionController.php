@@ -9,6 +9,7 @@ use App\QuestionComment;
 use App\Tag;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class QuestionController extends Controller
 {
@@ -23,26 +24,24 @@ class QuestionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function single(Question $question)
+    public function single($question)
     {
         // take data
-        $questions = Question::where('id', $question->id)->get();
-        $userID = $questions[0]->user_id;
-        $questComents = QuestionComment::where('question_id', $question->id)->orderBy('id', 'DESC')->get();
-        $answers = Answer::where('question_id', $question->id)->orderBy('id', 'DESC')->get();
-        $users = User::where('id', $userID)->get();
-        $answerComents = AnswerComment::where('answer_id', $answers[0]->id)->orderBy('id', 'DESC')->get();
+        // $userID = $questions[0]->user_id;
+        // $questComents = QuestionComment::where('question_id', $question->id)->get();
+        // $answers = Answer::where('question_id', $question->id)->get();
+        // $users = User::where('id', $userID)->get();
+        // $answerComents = AnswerComment::where('answer_id', $answers[0]->id)->get();
 
 
         // view
         $data = [
-            'questions' => $questions,
-            'questComents' => $questComents,
-            'users' => $users,
-            'answers' => $answers,
-            'answerComents' => $answerComents
+            'question' => Question::where('slug', $question)->first(),
+            // 'questComents' => $questComents,
+            // 'users' => $users,
+            // 'answers' => $answers,
+            // 'answerComents' => $answerComents
         ];
-
 
         return view('single', $data);
     }
@@ -71,7 +70,13 @@ class QuestionController extends Controller
             'content' => 'required'
         ]);
         // insert data
-        $question = Question::create($request->all());
+        $question = Question::create([
+          'title' => $request->title,
+          'slug' => Str::of($request->title)->slug('-'),
+          'content' => $request->content,
+          'user_id' => $request->user_id,
+
+        ]);
 
         // inserting tag to question
         foreach (explode(' ', $request->tags) as $tag) {

@@ -102,29 +102,35 @@
                 </div>
             </div>
             {{-- daftar pertanyaan --}}
-            @foreach ($questions as $question)
-                <div class="row m-0 mb-3">
-                <div class="col-md-12">
-                    <div class="border border-dark rounded p-3">
-                        <h4><u><a class="text-dark" href="/pertanyaan/{{$question->id}}">{{$question->title}}</a></u>
-                        </h4>
-                        <div class="my-2">
-                            @foreach ($question->tags as $tag)
-                            <a class="badge badge-primary ">{{$tag->name}}</a>
-                            @endforeach
-                        </div>
-                        <p>{{$question->content}}</p>
 
-                        @foreach ($users as $user)
-                        @if ($user->id == $question->user_id)
-                        <p class="text-muted">Oleh {{ $user->name }}, {{$question->created_at->format('d M Y')}}
-                        </p>
-                        @endif
-                        @endforeach
-                    </div>
-                </div>
-            </div>
+            @if ($questions)
+              @foreach ($questions as $question)
+                  <div class="row m-0 mb-3">
+                      <div class="col-md-12">
+                          <div class="border border-dark rounded p-3">
+                              <h4><u><a class="text-dark" href="/pertanyaan/{{$question->slug}}">{{$question->title}}</a></u>
+                              </h4>
+                              <div class="my-2">
+                                  @foreach ($question->tags as $tag)
+                                  <a class="badge badge-primary ">{{$tag->name}}</a>
+                                  @endforeach
+                              </div>
+                              <p>{{$question->content}}</p>
+
+                              @foreach ($users as $user)
+                              @if ($user->id == $question->user_id)
+                              <p class="text-muted">Oleh {{ $user->name }}, {{$question->created_at->format('d M Y')}}
+                              </p>
+                              @endif
+                              @endforeach
+                          </div>
+                      </div>
+                  </div>
                 @endforeach
+              @endif
+
+
+
         </div>
     </div>
 </div>
