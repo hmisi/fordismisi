@@ -102,6 +102,7 @@
                   @if($answer->best_answer == 1)
                             <div class="card-deck row m-0 justify-content-center my-3 shadow-sm rounded p-3 bg-success text-white">
                               <div class="col-sm-12">
+                                <p class="text-center"><b>Jawaban Terpilih!</b></p>
                                 <h6 class="text-right">
                           @else
                             <div class="card-deck row m-0 justify-content-center my-3 shadow-sm rounded p-3">
