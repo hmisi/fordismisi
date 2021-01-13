@@ -45,11 +45,14 @@
             <p>================================</p>
         </div>
         <div class="col-md-5 text-center mt-3">
-            <p><b>Forum Diskusi Mahasiswa Informatika dan Sistem Informasi</b> adalah wadah 
+            <p><b>Forum Diskusi Mahasiswa Informatika dan Sistem Informasi</b> adalah wadah
               untuk menampung diskusi mahasiswa Informatika dan Sistem Informasi.
               Melihat banyak mahasiswa yang kesulitan untuk bertanya tentang Informatika di Kampus.
               Dengan adanya FORDISMISI, Diharapkan mahasiswa bisa menjadi lebih aktif bertanya dan menjawab.</p>
-            <a class="btn btn-primary my-3" href="{{url('/home')}}">Mulai Memasuki Forum sekarang</a>
+            <a class="btn btn-info my-3" href="{{url('/home')}}">Mulai Memasuki Forum sekarang</a><!-- Button trigger modal -->
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+              Baca Aturan Forum dulu!
+          </button>
         </div>
     </div>
 </div>

@@ -21,11 +21,12 @@ class QuestionController extends Controller
      */
     public function single($question)
     {
-        $question_id = Question::where('slug', $question)->first();
+        $question_data = Question::where('slug', $question)->first();
         // take data
         // $questComents = QuestionComment::where('question_id', $question->id)->get();
-        // $answers = Answer::where('question_id', $question->id)->get();
-        $user = User::where('id', $question_id->user_id)->first();
+        $answers = Answer::where('question_id', $question_data->id)->get();
+        $user = User::where('id', $question_data->user_id)->first();
+        $users = User::orderBy('id', 'desc')->get();
         // $answerComents = AnswerComment::where('answer_id', $answers[0]->id)->get();
 
         // view
@@ -33,7 +34,8 @@ class QuestionController extends Controller
             'question' => Question::where('slug', $question)->first(),
             // 'questComents' => $questComents,
             'user' => $user,
-            // 'answers' => $answers,
+            'users' => $users,
+            'answers' => $answers,
             // 'answerComents' => $answerComents
         ];
 

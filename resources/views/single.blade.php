@@ -26,31 +26,131 @@
                     </div>
                 </div>
             </div>
-            {{-- daftar pertanyaan --}}
-                <div class="card-deck row m-0 justify-content-center mb-3">
-                    <div class="col-sm-12">
-                        <h3>{{ $question->title }}</h3>
-                        @if (Auth::user() != null)
-                          @if($question->user_id == Auth::user()->id)
 
-                              <a href="/pertanyaan/{{ $question->id }}/edit" class="btn btn-sm btn-primary"><i
-                                      class="far fa-edit"></i></a>
-                              <form action="/pertanyaan/{{ $question->id }}" method="POST" class="d-inline">
+
+
+            {{--  pertanyaan --}}
+            <div class="card-deck row m-0 justify-content-center mb-3 shadow-sm rounded p-3">
+                <div class="col-sm-12">
+                    <h3>{{ $question->title }}</h3>
+                    @if (Auth::user() != null)
+                      @if($question->user_id == Auth::user()->id)
+
+                          <a href="/pertanyaan/{{ $question->id }}/edit" class="btn btn-sm btn-primary"><i
+                                  class="far fa-edit"></i></a>
+                          <form action="/pertanyaan/{{ $question->id }}" method="POST" class="d-inline">
+                              @method('delete')
+                              @csrf
+                              <button class="btn btn-sm btn-danger"><i class="far fa-trash-alt"></i></button>
+                          </form>
+                      @endif
+                    @endif
+                    @if ($user->id == $question->user_id)
+                    <p class="text-muted">
+                      Oleh {{ $user->name }} pada {{$question->created_at->format('d M Y')}}
+                    </p>
+                    @endif
+                    <p class="mt-2">{{ $question->content }}</p>
+                </div>
+            </div>
+
+
+
+
+            {{--  jawaban --}}
+            <h4>Jawaban</h4>
+            @if (Auth::user() != null)
+              <div class="text-right mt-3">
+                  <button class="btn btn-success btn-sm" type="button" data-toggle="collapse"
+                      data-target="#collapse{{ $question->id }}" aria-expanded="false"
+                      aria-controls="collapse{{ $question->id }}">
+                      Jawab Pertanyaan!
+                  </button>
+                  </p>
+                  <div class="collapse" id="collapse{{ $question->id }}">
+                      {{-- form --}}
+                      <form method="POST" action="/answer">
+                          @csrf
+                          <div class="form-group">
+                              <label for="content">Isi Jawaban</label>
+                              <input type="text" name="question_id" value="{{ $question->id }}" hidden>
+                              <input type="text" name="user_id" value="{{ Auth::user()->id }}" hidden>
+                              <input type="text" class="form-control  @error('content') is-invalid @enderror " id="content"
+                                  name="content" placeholder="Masukan jawaban kamu!">
+
+                              @error('content')
+                                  <div class="invalid-feedback">
+                                      {{ $message }}
+                                  </div>
+                              @enderror
+
+                          </div>
+                          <button type="submit" class="btn btn-primary btn-sm">Jawab Pertanyaan!</button>
+                      </form>
+                  </div>
+              </div>
+            @else
+              <p>Belum ada jawaban nih.. </p>
+              <a href="{{route('login')}}" class="btn btn-info">Jawab Pertanyaannya!</a>
+            @endif
+
+            {{-- DAFTAR JAWABAN --}}
+            @if ($answers !== null)
+
+              @foreach($answers as $answer)
+                @if($answer->question_id == $question->id)
+                  @if($answer->best_answer == 1)
+                            <div class="card-deck row m-0 justify-content-center my-3 shadow-sm rounded p-3 bg-success text-white">
+                              <div class="col-sm-12">
+                                <h6 class="text-right">
+                          @else
+                            <div class="card-deck row m-0 justify-content-center my-3 shadow-sm rounded p-3">
+                              <div class="col-sm-12">
+                                <h6 class="text-right">
+                          @endif
+                      @endif
+
+                      {{ $answer->content }} - pada {{ $question->created_at->format('D M Y') }} Oleh
+                      @foreach ($users as $user)
+                          @if($user->id == $answer->user_id)
+                              {{ $user->name }}
+                          @endif
+                      @endforeach
+
+                      {{-- EDIT HAPUS JAWABAN --}}
+                      @if (Auth::user() != null)
+                        @if($answer->user_id == Auth::user()->id)
+                          <a href="/jawaban/{{ $answer->id }}/edit" class="btn btn-sm btn-primary"><i class="far fa-edit"></i></a>
+                          <form action="/jawaban/{{ $answer->id }}" method="POST" class="d-inline">
+                              <span>
                                   @method('delete')
                                   @csrf
-                                  <button class="btn btn-sm btn-danger"><i class="far fa-trash-alt"></i></button>
-                              </form>
+                                  <button class="btn btn-sm btn-danger text-right"><i class="far fa-trash-alt"></i></button>
+                              </span>
+                          </form>
+                        @endif
+                        @if($question->user_id == Auth::user()->id)
+                          <form action="/jawaban/{{ $answer->id }}/approved" method="post" class="d-inline">
+                            @method('patch')
+                            @csrf
+                            <input type="text" value="1" name="best_answer" hidden>
+                            <button class="btn" type="submit"><i class="far fa-check-circle"></i></button>
+                          </form>
+                          @if($answer->best_answer == 1)
+                            <form action="/jawaban/{{ $answer->id }}/approved" method="post" class="d-inline">
+                                @method('patch')
+                                @csrf
+                                    <input type="text" value="0" name="best_answer" hidden>
+                                    <button class="btn" type="submit"><i class="fa fa-times" aria-hidden="true"></i></button>
+                            </form>
                           @endif
                         @endif
-                        @if ($user->id == $question->user_id)
-                        <p class="text-muted">
-                          Oleh {{ $user->name }} pada {{$question->created_at->format('d M Y')}}
-                        </p>
-                        @endif
-                        <p class="mt-2">{{ $question->content }}</p>
-                    </div>
+                      @endif
+                    </h6>
+                  </div>
                 </div>
-        </div>
+              @endforeach
+        @endif
     </div>
 </div>
 @endsection

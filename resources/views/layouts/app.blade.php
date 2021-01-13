@@ -64,6 +64,51 @@
             <main class="content">
                 @yield('content')
             </main>
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Aturan Forum AyoAsk!</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    </div>
+                    <div class="modal-body">
+                      <ul>
+                          <li>
+                            Ingat! Banyak orang punya masalah yang sama akan ikut terbantu ketika kamu bertanya tidak perlu menulis [tolong], [ask], [help], dan sebagainya
+                            Sopan dan ramah dalam berinteraksi sesama anggota.
+                          </li>
+                          <li>
+                            Pastikan judul dan pertanyaannya relevan dengan masalah Kamu. Bukan hanya menulis "tugas kampus", "ada error dst."
+                          </li>
+                          <li>
+                            Pastikan kamu sudah teliti dan melihat dua kali kesalahan kamu. Kesalahan bukan hanya karena salah menulis atau salah variable. Berusaha dengan maksimal, Sebelum bertanya.
+                          </li>
+                          <li>
+                            Silahkan tandai jawaban sebagai "jawaban terbaik" jika sudah terjawab. Termasuk saat kamu menjawabnya sendiri.
+                            Jika pertanyaan terjawab sendiri, silahkan tulis jawabannya
+                          </li>
+                          <li>
+                            Konten yang tidak relevan, mengandung spam, SARA atau pornografi akan langung dihapus
+                          </li>
+                          <li>
+                            Jangan buat pertanyaan bercabang, jika pertanyaan sudah terjawab, buka pertanyaan baru untuk pertanyaan yang lain
+                            Kalau pertanyaan tidak jelas tuliskan di "komentar" bukan "jawaban". "Jawaban khusus untuk menjawab pertanyaan"
+                          </li>
+                          <li>
+                            Tidak ada pembulian!
+                          </li>
+                      </ul>
+
+                    </div>
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+                </div>
+            </div>
         <div class="text-center my-5">
             <p>&copy; Copyright FORDISMISI {{date('Y')}}<br>Dibuat dengan [ 🖤 ] untuk Developers</p>
         </div>

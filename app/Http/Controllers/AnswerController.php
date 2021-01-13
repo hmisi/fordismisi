@@ -41,9 +41,11 @@ class AnswerController extends Controller
         // insert data
         Answer::create($request->all());
 
+        $question = Question::where('id', $request->question_id)->first();
 
 
-        return redirect('/pertanyaan/'. $request->question_id)->with('status', 'Jawaban dikirim!!');
+
+        return redirect('/pertanyaan/'. $question->slug)->with('status', 'Jawaban dikirim!!');
     }
 
     /**
@@ -85,7 +87,11 @@ class AnswerController extends Controller
             'content' => $request->content
         ]);
 
-        return redirect('/pertanyaan/'. $answer->question_id)->with('status', 'Jawaban Diubah!!');
+        $question = Question::where('id', $answer->question_id)->first();
+
+
+
+        return redirect('/pertanyaan/'. $question->slug)->with('status', 'Jawaban diupdate!!');
     }
 
     /**
@@ -96,10 +102,13 @@ class AnswerController extends Controller
      */
     public function destroy(Answer $answer)
     {
-        $questionID = Question::where('id', $answer->question_id)->get();
         $answer->delete();
 
-        return redirect('/pertanyaan/'. $questionID[0]->id)->with('status', 'jawaban Dihapus!!');
+        $question = Question::where('id', $answer->question_id)->first();
+
+
+
+        return redirect('/pertanyaan/'. $question->slug)->with('status', 'Jawaban dihapus!!');
     }
 
     public function approved(Request $request, Answer $answer)
@@ -108,6 +117,10 @@ class AnswerController extends Controller
             'best_answer' => $request->best_answer
         ]);
 
-        return redirect('/pertanyaan/'. $answer->question_id)->with('status', 'Jawaban Terbaik Diatur!!');
+        $question = Question::where('id', $answer->question_id)->first();
+
+
+
+        return redirect('/pertanyaan/'. $question->slug)->with('status', 'Jawaban diapproved!!');
     }
 }

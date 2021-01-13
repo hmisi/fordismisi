@@ -85,36 +85,6 @@
                         </form>
                     </div>
                 </div>
-                <div class="col-md-12">
-                    {{-- daftar komentar pertanyaan --}}
-
-                    @if (!empty($questComents))
-                        @foreach($questComents as $questComent)
-                            @if($questComent->question_id == $question->id)
-                                <p class="text-muted text-left blockquote-footer mt-3">{{ $questComent->content }} - at
-                                    {{ $question->created_at->format('D M Y') }} Oleh
-                                    @foreach($users as $user)
-                                        @if($user->id == $questComent->user_id)
-                                            {{ $user->name }}
-                                        @endif
-                                    @endforeach</p>
-                            @endif
-                            @if($questComent->user_id == Auth::user()->id)
-                                <div></div>
-                                <a href="/questionComment/{{ $questComent->id }}/edit" class="btn btn-sm btn-primary"><i
-                                        class="far fa-edit"></i></a>
-                                <form action="/questionComment/{{ $questComent->id }}" method="POST" class="d-inline">
-                                    <span>
-                                        @method('delete')
-                                        @csrf
-                                        <button class="btn btn-sm btn-danger text-right"><i
-                                                class="far fa-trash-alt"></i></button>
-                                    </span>
-                                </form>
-                            @endif
-                        @endforeach
-                    @endif
-                </div>
                 <div class="col-xl-12">
                     <h3 class="text-right">- Jawaban -</h3>
                     <div class="text-right mt-3">
