@@ -14,11 +14,6 @@ use Illuminate\Support\Str;
 class QuestionController extends Controller
 {
 
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -26,19 +21,18 @@ class QuestionController extends Controller
      */
     public function single($question)
     {
+        $question_id = Question::where('slug', $question)->first();
         // take data
-        // $userID = $questions[0]->user_id;
         // $questComents = QuestionComment::where('question_id', $question->id)->get();
         // $answers = Answer::where('question_id', $question->id)->get();
-        // $users = User::where('id', $userID)->get();
+        $user = User::where('id', $question_id->user_id)->first();
         // $answerComents = AnswerComment::where('answer_id', $answers[0]->id)->get();
-
 
         // view
         $data = [
             'question' => Question::where('slug', $question)->first(),
             // 'questComents' => $questComents,
-            // 'users' => $users,
+            'user' => $user,
             // 'answers' => $answers,
             // 'answerComents' => $answerComents
         ];

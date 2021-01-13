@@ -1,6 +1,6 @@
 @extends('layouts.app')
-@section('title', 'AyoAsk!')
-@section('desc', 'Forum Diskusi tentang Pemrograman Bahasa Indonesia. Ask, Tell, and Share')
+@section('title', 'FORDISMISI')
+@section('desc', 'Forum Diskusi tentang Pemrograman Bahasa Indonesia Oleh HMISI. Ask, Tell, and Share')
 
 @section('content')
 <div class="container">
@@ -114,7 +114,7 @@
               @foreach ($questions as $question)
                   <div class="row m-0 mb-3">
                       <div class="col-md-12">
-                          <div class="border border-dark rounded p-3">
+                          <div class="shadow-sm rounded p-3">
                               <h4><u><a class="text-dark" href="/pertanyaan/{{$question->slug}}">{{$question->title}}</a></u>
                               </h4>
                               <div class="my-2">

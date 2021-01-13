@@ -1,6 +1,6 @@
 @extends('layouts.app')
-@section('title', 'AyoAsk!')
-@section('desc', 'Forum Diskusi tentang Pemrograman Bahasa Indonesia. Ask, Tell, and Share')
+@section('title', 'FORDISMISI')
+@section('desc', 'Forum Diskusi tentang Pemrograman Bahasa Indonesia Oleh HMISI. Ask, Tell, and Share')
 
 @section('content')
 <div class="container">
@@ -30,17 +30,24 @@
                 <div class="card-deck row m-0 justify-content-center mb-3">
                     <div class="col-sm-12">
                         <h3>{{ $question->title }}</h3>
-                        @if($question->user_id == Auth::user()->id)
+                        @if (Auth::user() != null)
+                          @if($question->user_id == Auth::user()->id)
 
-                            <a href="/pertanyaan/{{ $question->id }}/edit" class="btn btn-sm btn-primary"><i
-                                    class="far fa-edit"></i></a>
-                            <form action="/pertanyaan/{{ $question->id }}" method="POST" class="d-inline">
-                                @method('delete')
-                                @csrf
-                                <button class="btn btn-sm btn-danger"><i class="far fa-trash-alt"></i></button>
-                            </form>
+                              <a href="/pertanyaan/{{ $question->id }}/edit" class="btn btn-sm btn-primary"><i
+                                      class="far fa-edit"></i></a>
+                              <form action="/pertanyaan/{{ $question->id }}" method="POST" class="d-inline">
+                                  @method('delete')
+                                  @csrf
+                                  <button class="btn btn-sm btn-danger"><i class="far fa-trash-alt"></i></button>
+                              </form>
+                          @endif
                         @endif
-                        <p class="mt-3">{{ $question->content }}</p>
+                        @if ($user->id == $question->user_id)
+                        <p class="text-muted">
+                          Oleh {{ $user->name }} pada {{$question->created_at->format('d M Y')}}
+                        </p>
+                        @endif
+                        <p class="mt-2">{{ $question->content }}</p>
                     </div>
                 </div>
         </div>
