@@ -106,23 +106,27 @@
                 @if($answer->question_id == $question->id)
                   @if($answer->best_answer == 1)
                             <div class="card-deck row m-0 justify-content-center my-3 shadow-sm rounded p-3 bg-success text-white">
-                              <div class="col-sm-12">
+                              <div class="col-sm-12 text-right">
                                 <p class="text-center"><b>Jawaban Terpilih!</b></p>
-                                <h6 class="text-right">
+                                <h6 class="">
                           @else
                             <div class="card-deck row m-0 justify-content-center my-3 shadow-sm rounded p-3">
-                              <div class="col-sm-12">
+                              <div class="col-sm-12 text-right">
                                 <h6 class="text-right">
                           @endif
-                      @endif
+                      @endif</h6>
 
-                      {{ $answer->content }} - pada {{ $question->created_at->format('D M Y') }} Oleh
-                      @foreach ($users as $user)
-                          @if($user->id == $answer->user_id)
-                              {{ $user->name }}
-                          @endif
-                      @endforeach
-
+                      {{ $answer->content }}
+                      <p>
+                        <b>
+                         pada {{ $question->created_at->format('D M Y') }} Oleh
+                          @foreach ($users as $user)
+                              @if($user->id == $answer->user_id)
+                                  {{ $user->name }}
+                              @endif
+                          @endforeach
+                        </b>
+                      </p>
                       {{-- EDIT HAPUS JAWABAN --}}
                       @if (Auth::user() != null)
                         @if($answer->user_id == Auth::user()->id)
@@ -152,7 +156,6 @@
                           @endif
                         @endif
                       @endif
-                    </h6>
                   </div>
                 </div>
               @endforeach
