@@ -8,19 +8,27 @@
         <div class="col-lg-9">
             <div class="my-3 row m-0 justify-content-center">
                 <div class="card-body text-center">
+                  @if (Auth::user())
+                    <h2>Hi! Selamat Datang<br /> Kembali {{Auth::user()->name}}!</h2>
+                  @else
+                    <h2>Hi! Selamat Datang Kamu!</h2>
+                  @endif
+                  <span class="badge badge-secondary p-2">#JagaJarak</span>
+                  <span class="badge badge-warning p-2">#PakeMasker</span>
+                  <span class="badge badge-success p-2">#SehatSehat</span>
                     <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
                         <div class="carousel-inner">
                             <div class="carousel-item active" >
-                              <h1 class="p-3">Bertanya Menambah Wawasan</h1>
+                              <h4 class="p-3">Bertanya Menambah Wawasan</h4>
                             </div>
                           <div class="carousel-item ">
-                            <h1 class="p-3">Запрашивать добавляет статистику</h1>
+                            <h4 class="p-3">Запрашивать добавляет статистику</h4>
                           </div>
                           <div class="carousel-item">
-                            <h1 class="p-3">Chiedere aggiunge approfondimenti</h1>
+                            <h4 class="p-3">Chiedere aggiunge approfondimenti</h4>
                           </div>
                           <div class="carousel-item">
-                            <h1 class="p-3">Shitsumon wa dōsatsu o tsuika shimasu</h1>
+                            <h4 class="p-3">Shitsumon wa dōsatsu o tsuika shimasu</h4>
                           </div>
                         </div>
                       </div>
@@ -59,8 +67,8 @@
                           </div>
                           <div class="form-group">
                               <label for="content">Isi Pertanyaan</label>
-                              <textarea type="text" class="form-control  @error('content') is-invalid @enderror "
-                                  id="summernote" name="content" placeholder="Masukan Pertanyaan kamu!" required
+                              <textarea type="text" id="summernote" class="form-control  @error('content') is-invalid @enderror "
+                                   name="content" placeholder="Masukan Pertanyaan kamu!" required
                                   rows="3">{{old('content')}}</textarea>
                               @error('content')
                               <div class="invalid-feedback">
@@ -70,10 +78,11 @@
                           </div>
                           <div class="form-group">
                               <label for="content">Tag Pertanyaan</label>
-                              <textarea type="text" class="form-control @error('content') is-invalid @enderror" id="tag"
-                                  name="tags" placeholder="Masukan Tag Pertanyaan kamu!"
-                                  required>{{ old('tags') }}</textarea>
+                              <input type="text" class="form-control @error('content') is-invalid @enderror" id="tag"
+                                  name="tags" placeholder="Masukan Tag Pertanyaan kamu!" value="{{ old('tags') }}"
+                                  required>
                               <small id="tags" class="form-text text-muted">*Pisahkan dengan spasi</small>
+                              <small id="tags" class="form-text text-muted">**Maks 3 yaa..</small>
                               @error('tags')
                               <div class="invalid-feedback">
                                   {{$message}}
@@ -126,7 +135,7 @@
 
                               @foreach ($users as $user)
                               @if ($user->id == $question->user_id)
-                              <p class="text-muted">Oleh {{ $user->name }}, {{$question->created_at->format('d M Y')}}
+                              <p class="text-muted">Ditanyakan oleh {{ $user->name }} pada {{$question->created_at->format('d M Y')}}
                               </p>
                               @endif
                               @endforeach
@@ -134,6 +143,8 @@
                       </div>
                   </div>
                 @endforeach
+              @else
+                <span class="alert alert-success">Belum ada Pertanyaan. Yu Bertanya!</span>
               @endif
         </div>
     </div>

@@ -20,8 +20,9 @@
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
 
-    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
+    <!-- include summernote css/js -->
+    <link href="{{asset('css/summernote.min.css')}}" rel="stylesheet">
+    <script src="{{asset('js/summernote.js')}}"></script>
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
@@ -110,14 +111,16 @@
                 </div>
             </div>
         <div class="text-center my-5">
-            <p>&copy; Copyright FORDISMISI {{date('Y')}}<br>Dibuat dengan [ 🖤 ] untuk Developers</p>
+            <p>&copy; Copyright HIMPUNAN MAHASISWA MANAJEMEN INFORMATIKA<br />DAN SISTEM INFORMASI ( <a href="https://hmisippg.org" class="text-dark"><u>HMISI</u></a> ) {{date('Y')}}<br><br />Dibuat dengan [ 🖤 ] untuk Developers</p>
         </div>
     </div>
 
+    <script src="{{asset('js/jquery.js')}}"></script>
     <script>
-        $(document).ready(function() {
-            $('#summernote').summernote();
-        });
+
+    $(document).ready(function() {
+      $('#summernote').summernote();
+    });
     </script>
 </body>
 </html>

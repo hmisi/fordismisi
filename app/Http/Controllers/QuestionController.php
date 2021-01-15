@@ -132,7 +132,7 @@ class QuestionController extends Controller
         }
         $question->tags()->sync($tagIds);
 
-        return redirect('/pertanyaan/' . $question->id)->with('status', 'Pertanyaan Diubah!!');
+        return redirect('/pertanyaan/' . $question->slug)->with('status', 'Pertanyaan Diubah!!');
     }
 
     /**

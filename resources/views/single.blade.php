@@ -45,6 +45,11 @@
                           </form>
                       @endif
                     @endif
+                    <div class="my-2">
+                        @foreach ($question->tags as $tag)
+                        <a class="badge badge-primary ">{{$tag->name}}</a>
+                        @endforeach
+                    </div>
                     @if ($user->id == $question->user_id)
                     <p class="text-muted">
                       Oleh {{ $user->name }} pada {{$question->created_at->format('d M Y')}}
@@ -75,8 +80,8 @@
                               <label for="content">Isi Jawaban</label>
                               <input type="text" name="question_id" value="{{ $question->id }}" hidden>
                               <input type="text" name="user_id" value="{{ Auth::user()->id }}" hidden>
-                              <input type="text" class="form-control  @error('content') is-invalid @enderror " id="content"
-                                  name="content" placeholder="Masukan jawaban kamu!">
+                              <textarea type="text" class="form-control  @error('content') is-invalid @enderror " id="content"
+                                  name="content" placeholder="Masukan jawaban kamu!" rows="4"></textarea>
 
                               @error('content')
                                   <div class="invalid-feedback">

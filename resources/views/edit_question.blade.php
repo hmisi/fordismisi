@@ -25,7 +25,7 @@
                     <div class="form-group">
                         <label for="content">Isi Pertanyaan</label>
                         <textarea type="text" class="form-control  @error('content') is-invalid @enderror " id="content"
-                            name="content">{{$question->content}}</textarea>
+                            name="content" rows="4">{{$question->content}}</textarea>
                         @error('content')
                         <div class="invalid-feedback">
                             {{$message}}
@@ -34,8 +34,8 @@
                     </div>
                     <div class="form-group">
                         <label for="content">Tag Pertanyaan</label>
-                        <textarea type="text" class="form-control @error('content') is-invalid @enderror"
-                            id="tag" name="tags" placeholder="Masukan Tag Pertanyaan kamu! (Pisahkan dengan spasi)" required>{{ old('tags') ?: $question->tags->implode('name', ' ') }}</textarea>
+                        <input type="text" class="form-control @error('content') is-invalid @enderror"
+                            id="tag" name="tags" value="{{ old('tags') ?: $question->tags->implode('name', ' ') }}" placeholder="Masukan Tag Pertanyaan kamu! (Pisahkan dengan spasi)" required>
                         @error('tags')
                         <div class="invalid-feedback">
                             {{$message}}
