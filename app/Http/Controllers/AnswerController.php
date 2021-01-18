@@ -111,11 +111,14 @@ class AnswerController extends Controller
         return redirect('/pertanyaan/'. $question->slug)->with('status', 'Jawaban dihapus!!');
     }
 
-    public function approved(Request $request, Answer $answer)
+    public function approved(Request $request, Answer $answer, Question $question)
     {
         $answer->update([
             'best_answer' => $request->best_answer
         ]);
+
+        Question::where('id', $answer->question_id)->update(['is_answer' => $request->answered]);
+
 
         $question = Question::where('id', $answer->question_id)->first();
 

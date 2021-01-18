@@ -100,7 +100,7 @@
             @endif
 
             {{-- DAFTAR JAWABAN --}}
-            @if ($answers !== null)
+            @if ($answers !== null) 
 
               @foreach($answers as $answer)
                 @if($answer->question_id == $question->id)
@@ -140,12 +140,6 @@
                           </form>
                         @endif
                         @if($question->user_id == Auth::user()->id)
-                          <form action="/jawaban/{{ $answer->id }}/approved" method="post" class="d-inline">
-                            @method('patch')
-                            @csrf
-                            <input type="text" value="1" name="best_answer" hidden>
-                            <button class="btn" type="submit"><i class="far fa-check-circle"></i></button>
-                          </form>
                           @if($answer->best_answer == 1)
                             <form action="/jawaban/{{ $answer->id }}/approved" method="post" class="d-inline">
                                 @method('patch')
@@ -154,6 +148,13 @@
                                     <button class="btn" type="submit"><i class="fa fa-times" aria-hidden="true"></i></button>
                             </form>
                           @endif
+                          <form action="/jawaban/{{ $answer->id }}/approved" method="post" class="d-inline">
+                            @method('patch')
+                            @csrf
+                            <input type="text" value="1" name="best_answer" hidden>
+                            <input type="text" value="1" name="answered" hidden>
+                            <button class="btn" type="submit"><i class="far fa-check-circle"></i> Pilih Jawaban Terbaik!</button>
+                          </form>
                         @endif
                       @endif
                   </div>
